@@ -1,8 +1,5 @@
-|
-
-|── ConvNet
-
-|── models
-
-|── data
-└── virtual-staging
+ |
+ |── ConvNet
+ |── models
+ |── data
+ └── virtual-staging
