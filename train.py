@@ -52,5 +52,4 @@ if __name__ == "__main__":
     parser.add_argument("--mode", type=str,
                         choices=["masked_to_staged", "empty_to_staged"])
     args = parser.parse_args()
-    args.mode = "masked_to_staged"
     main(args)
