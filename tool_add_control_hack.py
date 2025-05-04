@@ -10,6 +10,14 @@ from cldm.model import create_model
 from share import *
 import torch
 
+import torch
+from packaging import version
+
+def load_checkpoint(path, **kwargs):
+  if version.parse(torch.__version__) >= version.parse("2.6.0"):
+    return torch.load(path, weights_only=False, **kwargs)
+  else:
+    return torch.load(path, **kwargs)
 
 # assert len(sys.argv) == 3, 'Args are wrong.'
 
@@ -36,7 +44,7 @@ def get_node_name(name, parent_name):
 
 model = create_model(config_path='./models/control_v11p_sd15_inpaint.yaml')
 
-pretrained_weights = torch.load(input_path)
+pretrained_weights = load_checkpoint(input_path)
 if 'state_dict' in pretrained_weights:
     pretrained_weights = pretrained_weights['state_dict']
 
@@ -57,7 +65,7 @@ for k in scratch_dict.keys():
 
 print("Replacing init ControlNet parameters with pretrained inpainting ControlNet parameters.")
 # Transfer pretrained inpaint ControlNet state to the full model.
-pretrained_weights_control_inpainter = torch.load(
+pretrained_weights_control_inpainter = load_checkpoint(
     './models/control_v11p_sd15_inpaint.pth')
 for k in pretrained_weights_control_inpainter.keys():
     target_dict[k] = pretrained_weights_control_inpainter[k].clone()
