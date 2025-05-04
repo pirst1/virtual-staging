@@ -1,3 +1,10 @@
+import sys
+import os
+CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+CON_DIR = os.path.abspath(os.path.join(CUR_DIR, "..", "ControlNet"))
+if CON_DIR not in sys.path:
+    sys.path.insert(0, CON_DIR)
+
 from constants import AGNOSTIC, STAGED, EMPTY, CAPTION_STAGED
 from share import *
 import pytorch_lightning as pl
@@ -6,8 +13,6 @@ from dataset import PairedDataset
 from cldm.logger import ImageLogger
 from cldm.model import create_model, load_state_dict
 import argparse
-import sys
-sys.path.append('./ControlNet')
 
 
 def main(args):
