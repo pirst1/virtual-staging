@@ -47,7 +47,7 @@ def main(args):
     logger = ImageLogger(batch_frequency=logger_freq)
 
     # Train
-    trainer = pl.Trainer(enable_checkpointing=True, gpus=1,
+    trainer = pl.Trainer(enable_checkpointing=True, gpus=1, max_epochs=2,
                          precision=32, callbacks=[logger])
     trainer.fit(model, dataloader)
 
