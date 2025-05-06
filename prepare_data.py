@@ -49,8 +49,8 @@ def prepare_paired_data():
     # The masks and agnostic images are dumped to disk.
     for pair_ix in tqdm(range(num_pairs)):
         # Retrieve data for this pair ix
-        staged_image_path = str(Path(PAIRED_DATA_DIR) / f"{pair_ix}_{STAGED}.{PNG}")
-        empty_image_path = str(Path(PAIRED_DATA_DIR) / f"{pair_ix}_{EMPTY}.{PNG}")
+        staged_image_path = os.path.join(PAIRED_DATA_DIR, f"{pair_ix}_{STAGED}.{PNG}").replace("\\", "/")
+        empty_image_path = os.path.join(PAIRED_DATA_DIR, f"{pair_ix}_{EMPTY}.{PNG}").replace("\\", "/")
 
         staged = cv2.imread(staged_image_path)
         empty = cv2.imread(empty_image_path)
@@ -77,8 +77,8 @@ def prepare_paired_data():
         agnostic = np.copy(empty)
         agnostic[diff_mask == 255] = [0, 0, 0]
 
-        agnostic_image_path = str(Path(PAIRED_DATA_DIR) / f"{pair_ix}_{AGNOSTIC}.{PNG}")
-        mask_image_path = str(Path(PAIRED_DATA_DIR) / f"{pair_ix}_{MASK}.{PNG}")
+        agnostic_image_path = os.path.join(PAIRED_DATA_DIR, f"{pair_ix}_{AGNOSTIC}.{PNG}").replace("\\", "/")
+        mask_image_path = os.path.join(PAIRED_DATA_DIR, f"{pair_ix}_{MASK}.{PNG}").replace("\\", "/")
 
         # Write data to disk
         cv2.imwrite(agnostic_image_path, agnostic)
@@ -98,9 +98,9 @@ def prepare_paired_data():
     eval_datalist, train_datalist = datalist[0:10], datalist[10:]
 
     # Dump datalists to disk
-    with open(Path(DATA_DIR) / 'paired_eval_datalist.json', 'w') as fp:
+    with open(os.path.join(DATA_DIR, 'paired_eval_datalist.json'), 'w') as fp:
         json.dump(eval_datalist, fp)
-    with open(Path(DATA_DIR) / 'paired_train_datalist.json', 'w') as fp:
+    with open(os.path.join(DATA_DIR, 'paired_train_datalist.json'), 'w') as fp:
         json.dump(train_datalist, fp)
 
 

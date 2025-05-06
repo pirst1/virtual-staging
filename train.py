@@ -42,7 +42,7 @@ def main(args):
         dataset = PairedDataset(
             source_key=EMPTY, target_key=STAGED, caption_key=CAPTION_STAGED)
 
-    dataloader = DataLoader(dataset, num_workers=64,
+    dataloader = DataLoader(dataset, 
                             batch_size=batch_size, shuffle=True)
     logger = ImageLogger(batch_frequency=logger_freq)
 
