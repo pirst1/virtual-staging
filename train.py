@@ -8,6 +8,7 @@ if CON_DIR not in sys.path:
 from constants import AGNOSTIC, STAGED, EMPTY, CAPTION_STAGED
 from share import *
 import pytorch_lightning as pl
+import torch
 from torch.utils.data import DataLoader
 from dataset import PairedDataset
 from cldm.logger import ImageLogger
@@ -50,6 +51,8 @@ def main(args):
     trainer = pl.Trainer(enable_checkpointing=True, gpus=1, max_epochs=2,
                          precision=32, callbacks=[logger])
     trainer.fit(model, dataloader)
+    torch.save(model.state_dict(), f'./models/{args.mode}.ckpt')
+    print('Done.')
 
 
 if __name__ == "__main__":

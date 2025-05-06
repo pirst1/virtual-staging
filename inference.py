@@ -1,4 +1,11 @@
 # Dirty inference code to run on single example
+import sys
+import os
+CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+CON_DIR = os.path.abspath(os.path.join(CUR_DIR, "..", "ControlNet"))
+if CON_DIR not in sys.path:
+    sys.path.insert(0, CON_DIR)
+
 from cldm.ddim_hacked import DDIMSampler
 from cldm.model import create_model, load_state_dict
 from annotator.util import resize_image, HWC3
@@ -9,7 +16,6 @@ from share import *
 import config
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-import os
 import json
 import random
 import torch
@@ -17,8 +23,6 @@ import numpy as np
 import gradio as gr
 import einops
 import cv2
-import sys
-sys.path.append('./ControlNet')
 
 
 # Default params taken from example script in controlnet
