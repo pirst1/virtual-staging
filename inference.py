@@ -176,6 +176,6 @@ if __name__ == "__main__":
         plt.imshow(result)
         plt.title("Result", fontsize=10)
         plt.axis("off")
-        plt.savefig(f"inference_example_{ix}.png", dpi=300)
+        plt.savefig(f"./infer/inference_example_{ix}.png", dpi=300)
         plt.tight_layout()
         plt.close()
