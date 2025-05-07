@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     # Run inference
     a_prompt = 'best quality, extremely detailed'
-    n_prompt = 'longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality'
+    n_prompt = 'longbody, lowers, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality'
 
     # For the layout generation phase (just predicting "diff mask" in this case), we use the empty->staged ControlNet
     # to generate a rough scene in the room, and then extract a somewhat refined diff mask by segmenting out the

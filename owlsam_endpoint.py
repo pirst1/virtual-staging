@@ -25,7 +25,7 @@ class OwlSamSegmentor:
         """Use OwlSam to retrieve object instances from image based on prompted classes."""
         # Convert input image array to PILLOW image
         image = Image.fromarray(image)
-        texts = texts.split(",")
+        texts = texts.split(", ")
         predictions = self.detector(
             image,
             candidate_labels=texts,

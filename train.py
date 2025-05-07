@@ -51,6 +51,7 @@ def main(args):
     trainer = pl.Trainer(enable_checkpointing=True, gpus=1, max_epochs=2,
                          precision=32, callbacks=[logger])
     trainer.fit(model, dataloader)
+    
     torch.save(model.state_dict(), f'./models/{args.mode}.ckpt')
     print('Done.')
 
