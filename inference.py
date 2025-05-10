@@ -127,8 +127,7 @@ if __name__ == "__main__":
         prompt = element[CAPTION_STAGED]
 
         # Dirty initial scene generation based on empty room
-        initial_scene = process(
-            empty_to_staged, empty_to_staged_ddim_sampler, empty_input, "a furnished room", a_prompt, n_prompt)
+        initial_scene = process(empty_to_staged, empty_to_staged_ddim_sampler, empty_input, "a furnished room", a_prompt, n_prompt, strength=0.9)
 
         # Retrieve the "generated diff mask", corresponding to
         # a binary mask covering all objects of interest generated in the scene
@@ -141,8 +140,7 @@ if __name__ == "__main__":
 
         # Generate final scene using the agnostic room as input to the inpainting controlnet
         # finetuned on the small dataset.
-        result = process(masked_to_staged, masked_to_staged_ddim_sampler,
-                         agnostic, "a furnished room", a_prompt, n_prompt, strength=0.9)
+        result = process(masked_to_staged, masked_to_staged_ddim_sampler, agnostic, "a furnished room", a_prompt, n_prompt, strength=0.9)
 
         # Resize to original resolution and make a fancy plot
         scene_layout_mask = cv2.resize(scene_layout_mask, (w, h))
