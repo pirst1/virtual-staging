@@ -8,7 +8,8 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from image_captioning_endpoint import ImageCaptioner
+#from image_captioning_endpoint import ImageCaptioner
+from image_captioning_llava import ImageCaptioner
 from constants import AGNOSTIC, MASK, DATA_DIR, PAIRED_DATA_DIR, STAGED, EMPTY, PNG, CAPTION_EMPTY, CAPTION_STAGED
 
 
@@ -85,7 +86,13 @@ def prepare_paired_data():
         cv2.imwrite(mask_image_path, diff_mask)
 
         # Get image captions
-        caption_staged = captioner.caption_image(staged)
+        assistant = [
+            "A Bauhaus-inspired living room with a sleek black leather sofa, a tubular steel coffe table exemplifying modernist design, and a geometric patterned rug adding a touch of artistic fliar.",
+            "A glamorous master bedroom in Hollywood Regency style, boasting a plush tufted headboard, mirrored furniture reflecting elegance, luxurious fabrics in rich textures, and opulent gold accents for a touch of luxury.",
+            "A vibrant living room with a tropical theme, complete with comfortable rattan furniture, large leafy plants bringing the outdoors in, bright cushions adding pops of color, and bamboo blinds for anatural light control."
+        ]
+
+        caption_staged = captioner.caption_image(staged, assistant)
         caption_empty = captioner.caption_image(empty)
 
         # Add this element to the datalist
